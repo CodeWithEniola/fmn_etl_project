@@ -80,7 +80,7 @@ This pipeline processes 2 years (2024–2025) of FMCG sales operations data for 
 └─────────────────────────────────────────────────────────────────────┘
 
 Data Flow:
-Excel File → raw.* Tables → staging.* Views → marts.* Tables → Analytics
+Excel File → raw.* Tables → staging.* Tables → marts.* Tables → Analytics
 ```
 
 ---
@@ -89,10 +89,10 @@ Excel File → raw.* Tables → staging.* Views → marts.* Tables → Analytics
 
 | Component | Technology | Version |
 | :--- | :--- | :--- |
-| **Orchestration** | Apache Airflow | 2.10.3 |
-| **Database** | PostgreSQL | 13 |
-| **Transformation** | dbt (data build tool) | 1.8.0 |
-| **ETL** | Python (pandas, SQLAlchemy) | 3.11 |
+| **Orchestration** | Apache Airflow | 3.2.2 |
+| **Database** | PostgreSQL | 16 |
+| **Transformation** | dbt (data build tool) | 1.10.0 |
+| **ETL** | Python (pandas, SQLAlchemy) | 3.12 |
 | **Containerisation** | Docker & Docker Compose | Latest |
 | **Data Storage** | PostgreSQL (raw, staging, marts schemas) | - |
 
@@ -104,7 +104,7 @@ Excel File → raw.* Tables → staging.* Views → marts.* Tables → Analytics
 FMIN_DE_PROJECT/
 ├── dags/                                    # Airflow DAGs
 │   ├── dataset/                             # Data source
-│   │   └── FMN Data Engineer Assesment Dataset.xlsx
+│   │   └── FMN Data Engineer Assessment Dataset.xlsx
 │   ├── fmn_dbt/                             # dbt project
 │   │   ├── models/
 │   │   │   ├── staging/                     # Staging models (views)
