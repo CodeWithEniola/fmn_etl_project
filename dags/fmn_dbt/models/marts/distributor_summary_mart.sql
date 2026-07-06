@@ -1,3 +1,7 @@
+-- depends_on: {{ ref('stg_transactions') }}
+-- depends_on: {{ ref('stg_distributors') }}
+-- depends_on: {{ ref('stg_date') }}
+
 {{
     config(
         materialized='table',

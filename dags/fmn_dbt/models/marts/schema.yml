@@ -1,21 +1,24 @@
-- name: distributor_summary_mart
-  description: Monthly KPIs per distributor including revenue, returns, order value, and profit margin.
-  columns:
-    - name: distributor_id
-      description: Natural key of the distributor.
-      tests:
-        - not_null
-    - name: distributor_name
-      description: Name of the distributor.
-    - name: region
-      description: Region where the distributor operates.
-    - name: total_revenue_ngn
-      description: Total revenue in NGN for the month.
-      tests:
-        - not_null
-    - name: return_rate_pct
-      description: Percentage of transactions that were returned (0-100%).
-    - name: avg_order_value_ngn
-      description: Average revenue per transaction in NGN.
-    - name: gross_profit_margin_pct
-      description: Gross profit as a percentage of revenue.
+version: 2
+
+models:
+  - name: distributor_summary_mart
+    description: Monthly KPIs per distributor including revenue, returns, order value, and profit margin.
+    columns:
+      - name: distributor_id
+        description: Natural key of the distributor.
+        tests:
+          - not_null
+      - name: distributor_name
+        description: Name of the distributor.
+      - name: region
+        description: Region where the distributor operates.
+      - name: total_revenue_ngn
+        description: Total revenue in NGN for the month.
+        tests:
+          - not_null
+      - name: return_rate_pct
+        description: Percentage of transactions that were returned (0-100%).
+      - name: avg_order_value_ngn
+        description: Average revenue per transaction in NGN.
+      - name: gross_profit_margin_pct
+        description: Gross profit as a percentage of revenue.

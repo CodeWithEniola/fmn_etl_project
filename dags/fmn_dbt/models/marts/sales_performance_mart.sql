@@ -1,3 +1,8 @@
+-- depends_on: {{ ref('stg_transactions') }}
+-- depends_on: {{ ref('stg_salespersons') }}
+-- depends_on: {{ ref('stg_monthly_targets') }}
+-- depends_on: {{ ref('stg_date') }}
+
 {{ config(materialized='table') }}
 
 with
@@ -33,9 +38,9 @@ targets as (
         year,
         month,
         target_revenue_ngn,
-        achievement_pct as  source_achievement_pct
+        achievement_pct as source_achievement_pct
     from {{ ref('stg_monthly_targets') }}
-)
+),   -- ✅ Added missing comma here
 
 -- 4. Combine all data into the final mart
 final as (

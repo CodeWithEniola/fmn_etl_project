@@ -2,6 +2,5 @@ psycopg2-binary==2.9.12
 pandas==3.0.4
 sqlalchemy==2.0.51
 python-dotenv==1.2.2
-dbt-postgres==1.10.0
+dbt-postgres==1.9.0
 openpyxl==3.1.5
-dbt-postgres==1.10.0

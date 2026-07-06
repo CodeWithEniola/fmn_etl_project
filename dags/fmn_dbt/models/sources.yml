@@ -2,12 +2,17 @@ version: 2
 
 sources:
   - name: raw
-    description: Raw staging tables loaded directly from Excel.
+    description: Raw staging tables loaded from Excel via Python ETL.
     tables:
       - name: raw_Transactions
-        description: Raw transactions with original column names.
+        description: Raw transactions with snake_case columns.
       - name: raw_Products
+        description: Raw product master data.
       - name: raw_Distributors
+        description: Raw distributor master data.
       - name: raw_Salespersons
+        description: Raw salesperson master data.
       - name: raw_Monthly_Targets
+        description: Raw monthly targets per salesperson.
       - name: raw_Date_Table
+        description: Raw date dimension.

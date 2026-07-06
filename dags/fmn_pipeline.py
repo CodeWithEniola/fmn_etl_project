@@ -1,6 +1,6 @@
 from airflow import DAG  #Verify that the DAG import is correct or we use airflow.models.DAG or go to my dev container
-from airflow.operators.python import PythonOperator
-from airflow.operators.bash import BashOperator
+from airflow.providers.standard.operators.python import PythonOperator
+from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from datetime import datetime, timedelta
 import pandas as pd
@@ -76,8 +76,9 @@ with DAG(
 
     dbt_run = BashOperator(
         task_id='dbt_run',
-        bash_command='cd /opt/airflow/dags/fmn_dbt && dbt run --profiles-dir .',
+        bash_command='cd /opt/airflow/dags/fmn_dbt && /home/airflow/.local/bin/dbt run --profiles-dir .',
         env={
+            'DBT_ALLOW_EXPERIMENTAL_ADAPTERS': 'true',
             'DBT_HOST': 'postgres',
             'DBT_USER': 'airflow',
             'DBT_PASSWORD': 'airflow',
@@ -89,8 +90,9 @@ with DAG(
 
     dbt_test = BashOperator(
         task_id='dbt_test',
-        bash_command='cd /opt/airflow/dags/fmn_dbt && dbt test --profiles-dir .',
+        bash_command='cd /opt/airflow/dags/fmn_dbt && /home/airflow/.local/bin/dbt test --profiles-dir .',
         env={
+            'DBT_ALLOW_EXPERIMENTAL_ADAPTERS': 'true',
             'DBT_HOST': 'postgres',
             'DBT_USER': 'airflow',
             'DBT_PASSWORD': 'airflow',
