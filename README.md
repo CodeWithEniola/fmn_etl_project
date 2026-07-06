@@ -759,4 +759,4 @@ dbt docs serve --profiles-dir . --port 8081
 
 ---
 
-**Good luck with your submission! 🚀**
+**Thank You 🚀**
