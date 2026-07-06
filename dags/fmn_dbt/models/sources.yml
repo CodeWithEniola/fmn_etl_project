@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw staging tables loaded directly from Excel.
+    tables:
+      - name: raw_Transactions
+        description: Raw transactions with original column names.
+      - name: raw_Products
+      - name: raw_Distributors
+      - name: raw_Salespersons
+      - name: raw_Monthly_Targets
+      - name: raw_Date_Table

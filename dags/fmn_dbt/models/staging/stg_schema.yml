@@ -1,0 +1,131 @@
+version: 2
+
+models:
+  # --- Staging Models ---
+  
+  - name: stg_transactions
+    description: Cleaned transaction data with derived fields.
+    columns:
+      - name: transaction_id
+        description: Primary key from source.
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: distributor_id
+        tests:
+          - not_null  # Ensures COALESCE worked
+      - name: salesperson_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_salespersons')
+              field: salesperson_id
+      - name: revenue_ngn
+        tests:
+          - not_null
+      - name: transaction_status
+        tests:
+          - accepted_values:
+              values: ['Completed', 'Pending', 'Returned']
+      - name: is_returned
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+  - name: stg_products
+    description: Cleaned product master data.
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: product_name
+        tests:
+          - not_null
+      - name: category
+        tests:
+          - accepted_values:
+              values: ['Beverages', 'Snacks', 'Dairy', 'Cereals', 'Condiments', 'Uncategorized'] #this might remain for now,check for  unique
+      - name: unit_price_ngn
+        tests:
+          - not_null
+      - name: unit_cost_ngn
+        tests:
+          - not_null
+
+  - name: stg_distributors
+    description: Cleaned distributor master data.
+    columns:
+      - name: distributor_id
+        tests:
+          - unique
+          - not_null
+      - name: distributor_name
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - accepted_values:
+              values: ['Abuja', 'Lagos', 'North West', 'South East', 'South West', 'North East', 'Unknown Region'] #-- this might remain for now,check for  unique later
+      - name: onboarding_date
+        tests:
+          - not_null
+
+  - name: stg_salespersons
+    description: Cleaned salesperson master data.
+    columns:
+      - name: salesperson_id
+        tests:
+          - unique
+          - not_null
+      - name: salesperson_name
+        tests:
+          - not_null
+      - name: monthly_target_ngn
+        tests:
+          - not_null
+
+  - name: stg_monthly_targets
+    description: Cleaned monthly targets with calculated achievement.
+    columns:
+      - name: record_id
+        tests:
+          - unique
+          - not_null
+      - name: salesperson_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_salespersons')
+              field: salesperson_id
+      - name: target_revenue_ngn
+        tests:
+          - not_null
+      - name: achievement_pct
+        description: Percentage of target achieved. Calculated if null in source.
+        tests:
+          - not_null  # Ensures my COALESCE worked --  headache point
+
+  - name: stg_date
+    description: Cleaned date dimension.
+    columns:
+      - name: date_key
+        tests:
+          - unique
+          - not_null
+      - name: year
+        tests:
+          - not_null
+#         - accepted_values:
+ #             values: [2024, 2025] -- I know the range of years in the dataset, but this might change in the future.
+      - name: month
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] #-- we have 12 months in a year, so this is a good test to ensure data integrity.
