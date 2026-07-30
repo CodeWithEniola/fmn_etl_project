@@ -193,8 +193,8 @@ POSTGRES_PORT=5432
 POSTGRES_DB=airflow
 
 # Airflow Admin
-AIRFLOW_ADMIN_USERNAME=admin
-AIRFLOW_ADMIN_PASSWORD=admin
+AIRFLOW_ADMIN_USERNAME=airflow
+AIRFLOW_ADMIN_PASSWORD=airflow
 AIRFLOW_ADMIN_EMAIL=admin@example.com
 
 # Airflow Database Connection
